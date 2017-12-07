@@ -8,6 +8,10 @@ import math
 PRIMES = [2]
 PRIME_FACTORS = []
 
+# returns true if number is divisible by div
+def isDivisible(number,div):
+    return (number % div == 0)
+
 def isPrime(number):
     global PRIMES
     bReturn = True
@@ -15,18 +19,16 @@ def isPrime(number):
     if number not in PRIMES: 
         # evaluates number against existing known PRIMES
         for p in PRIMES:
-            mod = number % p
-            if mod == 0:
+            if isDivisible(number,p):
                 bReturn = False
                 break
                 
         if bReturn == True:
             PRIMES.sort()
             # This number may be an undiscovered prime
-            # must evaluate all numbers between the greatest known prime to number in question divided by two
-            for p in myxrange(PRIMES[-1]+1,number/2):
-                mod = number % p
-                if mod == 0:
+            # must evaluate all numbers between the largest(plus one) known prime to number in question divided by two
+            for p in xrange(PRIMES[-1]+1,number/2):
+                if isDivisible(number,p):
                     bReturn = False
                     break
                     
@@ -50,14 +52,15 @@ def myxrange(a1, a2=None, step=1):
 
 def recursive_factors(number):
     global PRIME_FACTORS
-    for n in myxrange(2,number):
-        mod = number % n
-        if mod == 0  and isPrime(n):
+    for n in xrange(2,number):
+        if isDivisible(number,n)  and isPrime(n):
             PRIME_FACTORS.append(n)
             new_number = number/n
             if isPrime(new_number):
+                # this is the recursive break
                 PRIME_FACTORS.append(new_number)
             else:
+                # the new number is not prime but worthy splitting off to find its prime factors
                 recursive_factors(new_number)
             break
       
@@ -73,5 +76,6 @@ def main():
         PRIME_FACTORS.reverse()
         print PRIME_FACTORS[0]
         
+if __name__ == '__main__':
+    main()
 
-main()

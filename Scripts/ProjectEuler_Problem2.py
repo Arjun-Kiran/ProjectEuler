@@ -15,11 +15,13 @@ import math
 
 
 def fib(n):
+	"""This is a basic Fibonacci function but does not scale"""
 	if n == 1:
 		breturn = 1
 	elif n == 2:
 		breturn = 2
 	else:
+		# using recursion
 		breturn = fib(n-1) + fib(n-2)
 
 	return breturn
@@ -28,12 +30,20 @@ def fib(n):
 class fibObject:
 	"""A faster version of the fib function"""
 	def __init__(self):
+		# intializing the first three terms
+		# self.terms array is used as memory 
+		# and stored perviously found fibonacci numbers 
+		# to prevent duplication of work
 		self.terms = [0,1,2]
 
 	def fib(self,n):
 		if len(self.terms) > n:
+			# n is less than number of store fibonacci number
+			# that means that term is already found
 			breturn = self.terms[n]
 		else:
+			# newly discovered fibonacci number
+			# stored after calculated
 			breturn = self.fib(n-1) + self.fib(n-2)
 			self.terms.append(breturn)
 
@@ -41,6 +51,7 @@ class fibObject:
 
 def main():
 	obj = fibObject()
+	# starts at 2 because fibanacci numbers 1,2 are already determined
 	term_Number = 2
 	term_Value = obj.fib(term_Number) 
 	sum = 0
@@ -51,11 +62,6 @@ def main():
 
 	print sum
 
-main()
+if __name__ == '__main__':
+	main()
 
-
-
-
-
-    
-# main()

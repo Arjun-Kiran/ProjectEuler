@@ -1,7 +1,7 @@
 # The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 # Find the sum of all the primes below two million.
 # Project Euler Problem 10
-# NOT SOLVED 
+# NOT SOLVED: because it has a long execution time.  
 import math, sys, os
 
 
@@ -43,8 +43,9 @@ class PrimeFinder:
 
     def primeRange(self,nRange):
         for i in xrange(2,nRange):
-            if self.isPrime(i) and i not in self.aPrime:
-                self.addPrime(i)
+            #if self.isPrime(i) and i not in self.aPrime:
+            if self.isPrime(i):
+                #self.addPrime(i)
                 self.sum += i
 
     def sumPrimeArray(self):
@@ -55,10 +56,12 @@ class PrimeFinder:
 
     def solution(self,nRange):
         self.primeRange(nRange)
-        print self.aPrime
+        #print self.aPrime
         return self.sum
 
-sumPrime = PrimeFinder()
-print sumPrime.solution(2000000)
+if __name__ == '__main__':
+    sumPrime = PrimeFinder()
+    #print sumPrime.solution(10)
+    print sumPrime.solution(2000000)
 
         

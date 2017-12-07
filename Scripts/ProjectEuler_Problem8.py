@@ -22,7 +22,8 @@
 # 71636269561882670428252483600823257530420752963450
 
 # Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
-
+# URL: projecteuler.net/problem=8
+# Username: Arjun.Kiran
 
 import math
 
@@ -30,6 +31,7 @@ sDigit = '7316717653133062491922511967442657474235534919493496983520312774506326
 
     
 def product(sNumber):
+    # if you find 0, the product is automatically zero
     if sNumber.find('0') > -1:
         bReturn = 0
     else:

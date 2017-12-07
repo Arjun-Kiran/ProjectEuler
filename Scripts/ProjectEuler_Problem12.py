@@ -15,43 +15,44 @@
 # We can see that 28 is the first triangle number to have over five divisors.
 
 # What is the value of the first triangle number to have over five hundred divisors?
-# NOT SOLVED
+# NOT SOLVED:because it has a long execution time.  
 import math, sys, os
 
 
-class PrimeFinder:
-	def __init__(self):
-		self.aPrime = []
+def findDivisors(number):
+	if number != 1:
+		nDivisors = 2
+	else:
+		nDivisors = 1
 
-	def addPrime(self,nPrime):
-		self.aPrime.append(nPrime)
+	for i in xrange(2,number/2):
+		if (number%i) == 0:
+			nDivisors = nDivisors + 1
 
-	def isPrime(self,nNumber):
-		prime = True
-		for number in self.aPrime:
-			if number != nNumber:
-				if (nNumber%number) == 0:
-					prime = False
-					break
-		return prime
+	return nDivisors
 
-	def primeRange(self,nRange):
-		i = 1
-		while len(self.aPrime) < nRange:
-			i += 1
-			if self.isPrime(i):
-				self.addPrime(i)
-				print i
+def triangleNumber(n):
+	# can't use. is not scalable recursion 
+	bReturn = 0 # placeholder value
+	if n != 0:
+		bReturn = n + triangleNumber(n-1)
+	
+	return bReturn
 
-	def productPrimeArray(self):
-		product = 1
-		for i in self.aPrime:
-			product *= i 
-		return product
+def main():
+	nDivisors = 0
+	nTerm = 0
+	nTriangle = 0
+	while(nDivisors < 500):
+		nTerm = nTerm + 1
+		nTriangle = nTriangle + nTerm
+		nDivisors = findDivisors(nTriangle)
 
-	def solution(self,nRange):
-		self.primeRange(nRange)
-		return self.productPrimeArray()
+	print nTerm
+	print triangleNumber(nTerm)
 
-sumPrime = PrimeFinder()
-print sumPrime.solution(4)
+main()
+
+
+
+

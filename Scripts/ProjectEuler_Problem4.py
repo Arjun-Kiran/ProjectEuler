@@ -4,34 +4,45 @@
 # URL: projecteuler.net/problem=4
 # Username: Arjun.Kiran
 
-def isPalindrome(number):
+def reverseNumber(number):
+    """Reverses number"""
     pal = str(number)
     pal = list(pal)
     pal.reverse()
     pal = ''.join(pal)
-    if int(pal) == number:
+    return int(pal)    
+
+
+def isPalindrome(number):
+    """ checks if palindrome """
+    pal = reverseNumber(number)
+    if pal == number:
         bReturn = True
     else:
         bReturn = False
         
     return bReturn
 
+def whoIsLargest(possible, current):
+    if(current > possible):
+        return current
+    else:
+        return possible
 
 def main():
-    palindrome = []
+    palindrome = 0
+    # range from 999 to 100 in reverse order
     for x in xrange(999,99,-1):
         for y in xrange(999,99,-1):
             possible_pal = x*y
             if isPalindrome(possible_pal):
-                palindrome.append(possible_pal)
+                palindrome = whoIsLargest(possible_pal,palindrome)
     
-    palindrome.sort()
-    palindrome.reverse()
-    return palindrome[0]
-                
+    return palindrome            
 
+if __name__ == '__main__':
+    print main()
 
-print main()
 
 
 
